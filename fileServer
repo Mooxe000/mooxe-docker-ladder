@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CWD="$(cd -P — "$(dirname -- "$0")" && pwd -P)"
+CWD="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 DOWNLOADS="${CWD}/Downloads"
 LOGS="${DOWNLOADS}/Logs"
 
@@ -9,7 +9,6 @@ set -e
 docker run \
   -d \
   --name FileServer \
-  --rm \
   -p 8088:80 \
   -v ${DOWNLOADS}/:/usr/share/nginx/html nginx
   -v ${LOGS}/:/var/log/nginx \
