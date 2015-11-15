@@ -4,6 +4,7 @@ PassWord=""
 
 set -e
 
+docker rm ss
 docker run \
   -d \
   --name=ss \

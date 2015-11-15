@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -e
+
+docker rm polipo
 docker run \
   -d \
   --name=polipo \

@@ -8,10 +8,10 @@ PassWord=""
 echo "${UserName} * ${PassWord} *" > \
   $HOME/chap-secrets
 
+docker rm pptp
 docker run \
   -d \
   --name=pptp \
-  --rm \
   --privileged \
   --net=host \
   -v $HOME/chap-secrets:/etc/ppp/chap-secrets \

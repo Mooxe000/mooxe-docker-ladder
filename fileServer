@@ -6,10 +6,11 @@ LOGS="${DOWNLOADS}/Logs"
 
 set -e
 
+docker rm FileServer
 docker run \
   -d \
   --name FileServer \
   -p 8088:80 \
-  -v ${DOWNLOADS}/:/usr/share/nginx/html nginx
+  -v ${DOWNLOADS}/:/usr/share/nginx/html \
   -v ${LOGS}/:/var/log/nginx \
   nginx
