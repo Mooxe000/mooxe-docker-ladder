@@ -4,11 +4,9 @@ PassWord=""
 
 set -e
 
-docker rm ss
 docker run \
   -d \
-  --name=ss \
-  --rm\
+  --name=SS \
   -p 8388:8388 \
   tommylau/shadowsocks \
   -s 0.0.0.0 \

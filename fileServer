@@ -6,7 +6,6 @@ LOGS="${DOWNLOADS}/Logs"
 
 set -e
 
-docker rm FileServer
 docker run \
   -d \
   --name FileServer \

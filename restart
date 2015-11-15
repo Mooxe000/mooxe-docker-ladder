@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+ImageNames=(
+FileServer
+Polipo
+PPTP
+SS
+)
+
+for imgName in $ImageName; do
+  docker rm -f $imgName
+done
