@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -e
+
+UserName=""
+PassWord=""
+
+echo "${UserName} * ${PassWord} *" > \
+  $HOME/chap-secrets
+
+docker run \
+  -d \
+  --name=pptp \
+  --rm \
+  --privileged \
+  --net=host \
+  -v $HOME/chap-secrets:/etc/ppp/chap-secrets \
+  mobtitude/vpn-pptp

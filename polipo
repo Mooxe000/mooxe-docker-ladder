@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+docker run \
+  -d \
+  --name=polipo \
+  -p 8080:8123 \
+  clue/polipo \
+  proxyAddress=0.0.0.0
