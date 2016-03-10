@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
+cwd="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+
 set -e
 
 UserName=""
 PassWord=""
 
 echo "${UserName} * ${PassWord} *" > \
-  $HOME/chap-secrets
+  ${cwd}/chap-secrets
 
 docker run \
   -d \
   --name=PPTP \
   --privileged \
   --net=host \
-  -v $HOME/chap-secrets:/etc/ppp/chap-secrets \
+  -v ${cwd}/chap-secrets:/etc/ppp/chap-secrets \
   mobtitude/vpn-pptp
