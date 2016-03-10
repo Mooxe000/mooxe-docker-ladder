@@ -1,0 +1,25 @@
+polipo:
+  restart: always
+  image: clue/polipo
+  ports:
+    - "8080:8123"
+  environment:
+    proxyAddress: "0.0.0.0"
+  container_name: polipo
+
+pptp:
+  restart: always
+  image: mobtitude/vpn-pptp
+  net: "host"
+  volumes:
+    - ./chap-secrets:/etc/ppp/chap-secrets
+  privileged: true
+  container_name: pptp
+
+ss:
+  restart: always
+  image: tommylau/shadowsocks
+  ports:
+    - "8388:8388"
+  command: -s 0.0.0.0 -p 8388 -k ${PassWord} -m aes-256-cfb
+  container_name: ss
