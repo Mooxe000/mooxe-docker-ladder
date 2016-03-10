@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-CWD="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-DOWNLOADS="${CWD}/Downloads"
+cwd="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+DOWNLOADS="${cwd}/Downloads"
 LOGS="${DOWNLOADS}/Logs"
 
 set -e

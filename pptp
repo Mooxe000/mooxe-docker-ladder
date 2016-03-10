@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
 cwd="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+. ${cwd}/config.sh
 
 set -e
-
-UserName=""
-PassWord=""
 
 echo "${UserName} * ${PassWord} *" > \
   ${cwd}/chap-secrets

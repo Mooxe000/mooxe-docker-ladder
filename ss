@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-PassWord=""
+cwd="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+. ${cwd}/config.sh
 
 set -e
 
