@@ -12,7 +12,7 @@ pptp:
   image: mobtitude/vpn-pptp
   net: "host"
   volumes:
-    - ./chap-secrets:/etc/ppp/chap-secrets
+    - ../chap-secrets:/etc/ppp/chap-secrets
   privileged: true
   container_name: pptp
 
