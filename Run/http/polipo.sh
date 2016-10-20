@@ -2,9 +2,9 @@
 
 set -e
 
-docker run \
-  -d \
-  --name=Polipo \
+docker run -d \
+  --restart=always
+  --name=http-polipo \
   -p 8080:8123 \
   clue/polipo \
   proxyAddress=0.0.0.0

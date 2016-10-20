@@ -1,4 +1,3 @@
-Downloads/*
-chap-secrets
-config.sh
-compose/docker-compose.yml
+Downloads
+Compose/docker-compose.yml
+Compose/*.config

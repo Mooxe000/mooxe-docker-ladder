@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-cwd="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-. ${cwd}/config.sh
+# env PassWord=vpnpswd ./shadowsocks.sh
 
 set -e
+cwd="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 
 docker run \
   -d \
-  --name=SS \
+  --name=socks-shadowsocks \
   -p 8388:8388 \
   tommylau/shadowsocks \
   -s 0.0.0.0 \
