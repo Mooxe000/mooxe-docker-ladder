@@ -7,7 +7,7 @@ cwd="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 # echo ${PassWord}
 
 if [ -z $UserName ] && [ -z $PassWord ]; then
-  echo "env UserName=vpnuser PassWord=vpnpswd ./configfile.sh"
+  echo "env UserName=vpnuser PassWord=vpnpswd ./config.sh"
   . ${cwd}/env.sh
 fi
 
