@@ -1,40 +1,63 @@
-http:
-  restart: always
-  image: clue/polipo
-  ports:
-    - "8080:8123"
-  environment:
-    proxyAddress: "0.0.0.0"
-  container_name: http-polipo
+version: '2'
+services:
 
-pptp:
-  restart: always
-  image: mobtitude/vpn-pptp
-  net: "host"
-  volumes:
-    - ./pptp.config:/etc/ppp/chap-secrets
-  privileged: true
-  container_name: pptp
+  ss-server:
+    restart: always
+    image: tommylau/shadowsocks
+    ports:
+      - "8388:8388"
+    command:
+      - -s 0.0.0.0
+      - -p 8388
+      - -k ${PassWord}
+      - -m aes-256-cfb
+    container_name: ss-server
 
-l2tp:
-  restart: always
-  image: hwdsl2/ipsec-vpn-server
-  environment:
-    - VPN_IPSEC_PSK=${PassWord}
-    - VPN_USER=${UserName}
-    - VPN_PASSWORD=${PassWord}
-  ports:
-    - "500:500/udp"
-    - "4500:4500/udp"
-  volumes:
-    - /lib/modules:/lib/modules:ro
-  privileged: true
-  container_name: l2tp-ipsec
+  ss-client:
+    restart: always
+    image: mooxe/shadowsocks-go-client
+    ports:
+      - "7070:7070"
+    command:
+      - /go/bin/shadowsocks-local
+      - -s ss-server
+      - -p 8388
+      - -k ${PassWord}
+      - -m aes-256-cfb
+      - -b 0.0.0.0
+      - -l 7070
+    container_name: ss-client
 
-shadowsocks:
-  restart: always
-  image: tommylau/shadowsocks
-  ports:
-    - "8388:8388"
-  command: -s 0.0.0.0 -p 8388 -k ${PassWord} -m aes-256-cfb
-  container_name: socks-shadowsocks
+  http-polipo:
+    restart: always
+    image: vimagick/polipo
+    command:
+      - authCredentials=${UserName}:${PassWord}
+      - socksParentProxy=ss-client:7070
+    ports:
+      - "8123:8123"
+    container_name: http-polipo
+
+  pptp:
+    restart: always
+    image: mobtitude/vpn-pptp
+    network_mode: "host"
+    volumes:
+      - ./pptp.config:/etc/ppp/chap-secrets
+    privileged: true
+    container_name: pptp
+
+  l2tp:
+    restart: always
+    image: hwdsl2/ipsec-vpn-server
+    environment:
+      - VPN_IPSEC_PSK=${PassWord}
+      - VPN_USER=${UserName}
+      - VPN_PASSWORD=${PassWord}
+    ports:
+      - "500:500/udp"
+      - "4500:4500/udp"
+    volumes:
+      - /lib/modules:/lib/modules:ro
+    privileged: true
+    container_name: l2tp-ipsec
