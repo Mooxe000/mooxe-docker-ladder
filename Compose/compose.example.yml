@@ -7,10 +7,10 @@ services:
     ports:
       - "8388:8388"
     command:
-      - -s 0.0.0.0
-      - -p 8388
-      - -k ${PassWord}
-      - -m aes-256-cfb
+      -s 0.0.0.0
+      -p 8388
+      -k ${PassWord}
+      -m aes-256-cfb
     container_name: ss-server
 
   ss-client:
@@ -19,13 +19,13 @@ services:
     ports:
       - "7070:7070"
     command:
-      - /go/bin/shadowsocks-local
-      - -s ss-server
-      - -p 8388
-      - -k ${PassWord}
-      - -m aes-256-cfb
-      - -b 0.0.0.0
-      - -l 7070
+      /go/bin/shadowsocks-local
+      -s ss-server
+      -p 8388
+      -k ${PassWord}
+      -m aes-256-cfb
+      -b 0.0.0.0
+      -l 7070
     container_name: ss-client
 
   http-polipo:
